@@ -1,19 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
-</head>
-<body>
-    <h1>Listado</h1>
+@extends('template')
+
+@section('content')
+    <h2>Listado</h2>
     @foreach ($posts as $post)
         <p>
             <strong>{{ $post['id'] }}</strong>
-            <a href="#">
+            <a href="{{ route('post', $post['slug']) }}">
                 {{ $post['title'] }}
             </a>
         </p>
     @endforeach
-</body>
-</html>
+@endsection

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 Route::get('blog', function () {
     // Consulta a Base de Datos
@@ -38,7 +38,7 @@ Route::get('blog', function () {
     return view('blog', [
         'posts' => $posts,
     ]);
-});
+})->name('blog');
 
 Route::get('blog/{slug}', function ($slug) {
     // Consulta a Base de Datos
@@ -47,4 +47,7 @@ Route::get('blog/{slug}', function ($slug) {
     return view('post', [
         'post' => $post,
     ]);
-})->where('slug', '[A-Za-z0-9\-]+');
+})
+    ->where('slug', '[A-Za-z0-9\-]+')
+    ->name('post')
+;
