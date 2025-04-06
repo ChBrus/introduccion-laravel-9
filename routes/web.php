@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -12,21 +11,40 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::get('/', function () {
-    return 'Ruta home';
+    return view('home');
 });
 
 Route::get('blog', function () {
-    return 'Listado de publiocaciones';
+    // Consulta a Base de Datos
+
+    $posts = [
+        [
+            'id' => 1,
+            'title' => 'PHP',
+            'slug' => 'php',
+        ],
+        [
+            'id' => 2,
+            'title' => 'Laravel',
+            'slug' => 'laravel',
+        ],
+        [
+            'id' => 3,
+            'title' => 'JavaScript',
+            'slug' => 'javascript',
+        ]
+    ];
+
+    return view('blog', [
+        'posts' => $posts,
+    ]);
 });
 
 Route::get('blog/{slug}', function ($slug) {
     // Consulta a Base de Datos
+    $post = $slug;
 
-    return 'Publicación: ' . $slug;
+    return view('post', [
+        'post' => $post,
+    ]);
 })->where('slug', '[A-Za-z0-9\-]+');
-
-Route::get('buscar', function (Request $request) {
-    // dd($request->query('q'));
-    // return 'Buscando: ' . $request->query('q');
-    return $request->all();
-})->name('buscar');
