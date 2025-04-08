@@ -17,5 +17,5 @@ use App\Http\Controllers\PageController;
 Route::controller(PageController::class)->group(function () {
     Route::get('/', 'home')->name('home');
     Route::get('blog', 'blog')->name('blog');
-    Route::get('blog/{slug}', 'post')->where('slug', '[A-Za-z0-9\-]+')->name('post');
+    Route::get('blog/{post:slug}', 'post')->name('post');
 });

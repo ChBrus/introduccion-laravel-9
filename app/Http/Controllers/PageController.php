@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PageController extends Controller
 {
@@ -13,36 +14,30 @@ class PageController extends Controller
 
     public function blog()
     {
-        // Consulta a Base de Datos
+        # Get all posts
+        // $posts = Post::get();
 
-        $posts = [
-            [
-                'id' => 1,
-                'title' => 'PHP',
-                'slug' => 'php',
-            ],
-            [
-                'id' => 2,
-                'title' => 'Laravel',
-                'slug' => 'laravel',
-            ],
-            [
-                'id' => 3,
-                'title' => 'JavaScript',
-                'slug' => 'javascript',
-            ]
-        ];
+        # Get first post
+        // $post = Post::first();
+
+        # Find post by id
+        // $post = Post::find(25);
+
+        // dd($post);
+
+        $posts = Post::oldest('id')->paginate(
+            pageName: 'blog'
+        );
 
         return view('blog', [
             'posts' => $posts,
+            'elements' => $posts->getUrlRange(1, $posts->lastPage()),
+            'currentPage' => $posts->currentPage(),
         ]);
     }
 
-    public function post($slug)
+    public function post(Post $post)
     {
-        // Consulta a Base de Datos
-        $post = $slug;
-
         return view('post', [
             'post' => $post,
         ]);
