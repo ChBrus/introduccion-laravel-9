@@ -16,6 +16,15 @@
             <li>
                 <a href="{{ route('blog') }}">Blog</a>
             </li>
+            @auth
+                <li>
+                    <a href="{{ route('dashboard') }}">Dashboard</a>
+                </li>
+            @else
+                <li>
+                    <a href="{{ route('login') }}">Login</a>
+                </li>
+            @endauth
         </ul>
     </nav>
     <hr>
